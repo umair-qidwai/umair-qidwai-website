@@ -51,7 +51,7 @@ const Contact = () => {
             </motion.a>
             
             <motion.a
-              href="https://github.com/umairqidwai1"
+              href="https://github.com/umair-qidwai"
               whileHover={{ scale: 1.1, y: -2 }}
               className="p-3 border border-green-500/50 text-green-400 hover:bg-green-500/10 rounded-full transition-colors"
               target="_blank"

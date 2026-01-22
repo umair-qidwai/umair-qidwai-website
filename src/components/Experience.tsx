@@ -13,11 +13,25 @@ const Experience = () => {
 
   const experiences = [
     {
-      title: "Teaching Assistant",
-      company: "NICC",
-      period: "Sep. 2023 - Present",
-      description: "Assisted in teaching and mentoring students in computer science courses at The Ohio State University.",
-      technologies: ["Teaching", "Mentoring", "Computer Science"]
+      title: "Manufacturing System Operations Co-op",
+      company: "American Honda Motor — Columbus, IN",
+      period: "Aug. 2025 - Dec. 2025",
+      description: "Optimized PRTG alerts and dashboards to cut downtime incidents by ~3%, streamlined Omnivex Moxie server configs for real-time displays, and support high-availability manufacturing IT systems.",
+      technologies: ["PRTG", "Omnivex Moxie", "Monitoring", "High Availability", "Manufacturing IT"]
+    },
+    {
+      title: "AI Software Engineering Intern",
+      company: "EZO Solution — Austin, TX",
+      period: "May 2025 - Jul. 2025",
+      description: "Built a context-aware AI chatbot with vector search, prompt optimization, PaddleOCR multimodal intake, and a lightweight HTML/CSS front end for real-time domain Q&A.",
+      technologies: ["Vector DB", "Prompt Engineering", "PaddleOCR", "Full Stack", "AI Chatbot"]
+    },
+    {
+      title: "Full-Stack App Developer Intern",
+      company: "Cybersense — Dublin, OH",
+      period: "Aug. 2024 - May 2025",
+      description: "Delivered a cross-platform real estate app (React Native + SwiftUI), built FastAPI services for auth/profile/search, used Supabase Postgres for matching logic, and shipped an internal AI chatbot API with OpenWebUI integration.",
+      technologies: ["React Native", "SwiftUI", "FastAPI", "Supabase", "AI Chatbot"]
     }
   ];
 
@@ -44,7 +58,7 @@ const Experience = () => {
                 <h3 className="text-xl font-bold text-white">B.S. Computer Science & Engineering</h3>
                 <p className="text-green-400 font-medium">The Ohio State University</p>
               </div>
-              <span className="text-white/60 text-sm md:text-base">Expected June 2027</span>
+              <span className="text-white/60 text-sm md:text-base">Expected May 2028</span>
             </div>
             
             <p className="text-white/80 mb-4 leading-relaxed">
