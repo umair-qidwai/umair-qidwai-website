@@ -110,6 +110,14 @@ body {
   overflow: hidden;
 }
 
+.star-wrapper {
+  position: absolute;
+  pointer-events: none;
+  will-change: transform;
+  animation: drift var(--drift-duration, 7s) ease-in-out infinite alternate;
+  animation-delay: var(--drift-delay, 0s);
+}
+
 .star {
   position: absolute;
   background: white;
@@ -118,9 +126,13 @@ body {
   will-change: transform;
   pointer-events: none;
   animation: 
-    twinkle var(--twinkle-duration, 4s) infinite ease-in-out,
-    orbit var(--rotate-speed, 50s) infinite linear;
+    twinkle var(--twinkle-duration, 2.6s) infinite ease-in-out,
+    orbit var(--rotate-speed, 20s) infinite linear;
   animation-delay: 0s, var(--orbit-delay, 0s);
+}
+
+.star-accent {
+  box-shadow: 0 0 6px 1px rgba(255, 255, 255, 0.45);
 }
 
 .star-small {
@@ -148,6 +160,15 @@ body {
   }
   50% {
     opacity: calc(var(--base-opacity, 0.4) * 0.3);
+  }
+}
+
+@keyframes drift {
+  from {
+    transform: translate3d(calc(var(--drift-distance, 1px) * -1), calc(var(--drift-distance, 1px) * 0.5), 0);
+  }
+  to {
+    transform: translate3d(var(--drift-distance, 1px), calc(var(--drift-distance, 1px) * -0.5), 0);
   }
 }
 

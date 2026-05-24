@@ -5,10 +5,13 @@ const StarBackground = () => {
 
   const generateStars = () => {
     const stars = [];
-    const count = 150; // Adjust number of stars
+    const count = 180; // Slightly denser field for more visible motion
 
     for (let i = 0; i < count; i++) {
       const size = Math.random() < 0.6 ? 'small' : Math.random() < 0.8 ? 'medium' : 'large';
+      const wrapper = document.createElement('div');
+      wrapper.className = 'star-wrapper';
+
       const star = document.createElement('div');
       star.className = `star star-${size}`;
       
@@ -18,13 +21,24 @@ const StarBackground = () => {
       const x = 50 + Math.cos(angle) * distance; // Center at 50%
       const y = 50 + Math.sin(angle) * distance; // Center at 50%
       
-      star.style.left = `${x}%`;
-      star.style.top = `${y}%`;
-      star.style.setProperty('--twinkle-duration', `${4 + Math.random() * 4}s`);
-      star.style.setProperty('--rotate-speed', `${Math.random() * 20 + 40}s`); // 40-60s rotation
+      wrapper.style.left = `${x}%`;
+      wrapper.style.top = `${y}%`;
+      wrapper.style.setProperty('--drift-distance', `${Math.random() * 2.5 + 1}px`);
+      wrapper.style.setProperty('--drift-duration', `${5 + Math.random() * 4}s`);
+      wrapper.style.setProperty('--drift-delay', `-${Math.random() * 8}s`);
+
+      star.style.setProperty('--base-opacity', `${size === 'small' ? 0.4 : size === 'medium' ? 0.62 : 0.82}`);
+      star.style.setProperty('--twinkle-duration', `${1.4 + Math.random() * 1.6}s`);
+      star.style.setProperty('--rotate-speed', `${14 + Math.random() * 10}s`); // faster rotation
       star.style.setProperty('--orbit-distance', `${distance * 0.3}px`); // Scale down the orbit
-      star.style.setProperty('--orbit-delay', `-${Math.random() * 40}s`); // Random start position
-      stars.push(star);
+      star.style.setProperty('--orbit-delay', `-${Math.random() * 16}s`); // Random start position
+
+      if (size === 'large' || Math.random() > 0.88) {
+        star.classList.add('star-accent');
+      }
+
+      wrapper.appendChild(star);
+      stars.push(wrapper);
     }
     return stars;
   };
@@ -44,7 +58,6 @@ const StarBackground = () => {
       const scrollPercent = (scrolled / maxScroll) * 100;
 
       stars.forEach(star => {
-        const speed = parseFloat(star.style.getPropertyValue('--rotate-speed') || '50');
         const baseY = parseFloat(star.style.top) || 0;
         const parallaxSpeed = (100 - baseY) * 0.001; // Stars higher up move more
         const yOffset = scrollPercent * parallaxSpeed;
