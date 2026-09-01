@@ -19,24 +19,12 @@ const Contact = () => {
           className="backdrop-blur-sm bg-white/5 rounded-2xl border border-green-500/20 p-8 md:p-12"
         >
           <h2 className="text-4xl md:text-5xl font-bold text-green-400 mb-6">
-            Let's Work Together
+            Let's Connect
           </h2>
           
           <p className="text-xl text-white/80 mb-8 max-w-2xl mx-auto leading-relaxed">
-            I'm always interested in new opportunities and exciting projects. 
-            Let's discuss how we can bring your ideas to life.
+            Have a project or opportunity in mind? I'd love to hear from you.
           </p>
-          
-          <div className="flex flex-col sm:flex-row gap-4 justify-center items-center mb-8">
-            <motion.a
-              href="mailto:umairqidwai4@gmail.com"
-              whileHover={{ scale: 1.05 }}
-              whileTap={{ scale: 0.95 }}
-              className="px-8 py-4 bg-green-500 hover:bg-green-600 text-black font-semibold rounded-full transition-colors"
-            >
-              Get In Touch
-            </motion.a>
-          </div>
 
           <div className="flex justify-center gap-6">
             <motion.a
