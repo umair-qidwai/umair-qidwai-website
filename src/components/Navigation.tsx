@@ -1,28 +1,79 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useRef } from 'react';
 import { motion } from 'framer-motion';
 import { Download } from 'lucide-react';
 
+const sectionIds = ['about', 'experience', 'projects', 'contact'] as const;
+type SectionId = (typeof sectionIds)[number];
+
 const Navigation = () => {
   const [isScrolled, setIsScrolled] = useState(false);
+  const [activeSection, setActiveSection] = useState<SectionId | null>(null);
+  const navRef = useRef<HTMLElement>(null);
 
   useEffect(() => {
-    const handleScroll = () => {
+    let animationFrame: number | null = null;
+
+    const updateNavigation = () => {
+      animationFrame = null;
       setIsScrolled(window.scrollY > 100);
+
+      const marker = (navRef.current?.offsetHeight ?? 72) + 16;
+      let currentSection: SectionId | null = null;
+
+      sectionIds.forEach((sectionId) => {
+        const section = document.getElementById(sectionId);
+
+        if (section && section.getBoundingClientRect().top <= marker) {
+          currentSection = sectionId;
+        }
+      });
+
+      const isAtPageBottom =
+        window.scrollY + window.innerHeight >= document.documentElement.scrollHeight - 2;
+
+      setActiveSection(isAtPageBottom ? 'contact' : currentSection);
     };
-    window.addEventListener('scroll', handleScroll);
-    return () => window.removeEventListener('scroll', handleScroll);
+
+    const scheduleUpdate = () => {
+      if (animationFrame !== null) return;
+      animationFrame = window.requestAnimationFrame(updateNavigation);
+    };
+
+    updateNavigation();
+    window.addEventListener('scroll', scheduleUpdate, { passive: true });
+    window.addEventListener('resize', scheduleUpdate);
+
+    return () => {
+      window.removeEventListener('scroll', scheduleUpdate);
+      window.removeEventListener('resize', scheduleUpdate);
+
+      if (animationFrame !== null) {
+        window.cancelAnimationFrame(animationFrame);
+      }
+    };
   }, []);
 
-  const scrollToSection = (id: string) => {
+  const scrollToSection = (id: SectionId | 'top') => {
     if (id === 'top') {
       window.scrollTo({ top: 0, behavior: 'smooth' });
     } else {
-      document.getElementById(id)?.scrollIntoView({ behavior: 'smooth' });
+      const section = document.getElementById(id);
+
+      if (section) {
+        const navHeight = navRef.current?.offsetHeight ?? 72;
+        const sectionTop = section.getBoundingClientRect().top + window.scrollY;
+
+        window.scrollTo({
+          top: sectionTop - navHeight - 16,
+          behavior: 'smooth',
+        });
+      }
     }
   };
 
   return (
     <motion.nav
+      ref={navRef}
       initial={{ y: -100 }}
       animate={{ y: 0 }}
       className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
@@ -40,11 +91,16 @@ const Navigation = () => {
           </motion.button>
           
           <div className="hidden md:flex items-center space-x-8">
-            {['about', 'experience', 'projects', 'contact'].map((item) => (
+            {sectionIds.map((item) => (
               <button
                 key={item}
                 onClick={() => scrollToSection(item)}
-                className="text-white/80 hover:text-green-400 transition-colors capitalize"
+                aria-current={activeSection === item ? 'location' : undefined}
+                className={`transition-colors capitalize ${
+                  activeSection === item
+                    ? 'text-green-400 font-medium'
+                    : 'text-white/80 hover:text-green-400'
+                }`}
               >
                 {item}
               </button>
