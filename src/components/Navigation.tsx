@@ -96,9 +96,9 @@ const Navigation = () => {
                 key={item}
                 onClick={() => scrollToSection(item)}
                 aria-current={activeSection === item ? 'location' : undefined}
-                className={`transition-colors capitalize ${
+                className={`font-medium transition-colors capitalize ${
                   activeSection === item
-                    ? 'text-green-400 font-medium'
+                    ? 'text-green-400'
                     : 'text-white/80 hover:text-green-400'
                 }`}
               >
