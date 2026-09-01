@@ -21,14 +21,6 @@ const Navigation = () => {
     }
   };
 
-  const handleDownloadResume = () => {
-    // This will be updated when you upload the resume
-    const link = document.createElement('a');
-    link.href = '/resume.pdf';
-    link.download = 'Umair_Qidwai_Resume.pdf';
-    link.click();
-  };
-
   return (
     <motion.nav
       initial={{ y: -100 }}
@@ -59,15 +51,17 @@ const Navigation = () => {
             ))}
           </div>
           
-          <motion.button
+          <motion.a
             whileHover={{ scale: 1.05 }}
             whileTap={{ scale: 0.95 }}
-            onClick={handleDownloadResume}
+            href="/resume"
+            target="_blank"
+            rel="noopener noreferrer"
             className="flex items-center space-x-2 bg-green-500/20 hover:bg-green-500/30 border border-green-500/50 rounded-full px-4 py-2 transition-all"
           >
             <Download size={16} />
             <span>Resume</span>
-          </motion.button>
+          </motion.a>
         </div>
       </div>
     </motion.nav>

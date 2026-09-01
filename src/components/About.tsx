@@ -23,25 +23,25 @@ const About = () => {
           <div className="grid md:grid-cols-2 gap-12 items-center">
             <div className="space-y-6">
               <p className="text-lg text-white/90 leading-relaxed">
-                I'm a Computer Science & Engineering student at The Ohio State University, 
-                passionate about software development and IoT automation. Currently working 
-                as a Teaching Assistant while developing innovative projects.
+                I'm a Computer Science & Engineering student at The Ohio State University in the Honors Engineering Program, 
+                passionate about full-stack development, AI integration, and practical engineering solutions. 
+                Currently an intern at Wahed, building production-grade charitable-endowment platforms.
               </p>
               
               <p className="text-lg text-white/80 leading-relaxed">
-                I specialize in mobile app development with React Native, web development, 
-                and IoT systems. I love building practical solutions that solve real-world 
-                problems, from smart home automation to university scheduling tools.
+                I specialize in full-stack web development with Next.js and React, mobile apps with React Native, 
+                AI integration with embeddings and LLMs, and IoT systems. I love building products that solve real-world 
+                problems, from AI-powered learning platforms to smart home automation.
               </p>
               
               <div className="grid grid-cols-2 gap-4 pt-6">
                 <div className="text-center p-4 rounded-lg bg-green-500/10 border border-green-500/20">
-                  <div className="text-2xl font-bold text-green-400">2027</div>
-                  <div className="text-white/70">Graduation Year</div>
+                  <div className="text-2xl font-bold text-green-400">3.9/4.0</div>
+                  <div className="text-white/70">GPA</div>
                 </div>
                 <div className="text-center p-4 rounded-lg bg-green-500/10 border border-green-500/20">
-                  <div className="text-2xl font-bold text-green-400">5+</div>
-                  <div className="text-white/70">Projects Completed</div>
+                  <div className="text-2xl font-bold text-green-400">Dec 2027</div>
+                  <div className="text-white/70">Graduation</div>
                 </div>
               </div>
             </div>
@@ -50,9 +50,9 @@ const About = () => {
               <h3 className="text-xl font-semibold text-green-400 mb-6">Technologies</h3>
               
               {[
-                { category: 'Languages', skills: ['Java', 'Python', 'JavaScript', 'SQL'] },
-                { category: 'Frameworks', skills: ['React Native', 'React', 'Flask', 'MySQL'] },
-                { category: 'Tools & Systems', skills: ['Git', 'Linux', 'Google Cloud', 'IoT'] }
+                { category: 'Languages', skills: ['TypeScript', 'JavaScript', 'Python', 'Java', 'SQL', 'C/C++'] },
+                { category: 'Frameworks', skills: ['Next.js', 'React', 'React Native', 'Node.js', 'FastAPI', 'Tailwind CSS'] },
+                { category: 'Technologies', skills: ['PostgreSQL', 'Supabase', 'AWS', 'Docker', 'Stripe', 'Linux', 'Firebase'] }
               ].map((tech, index) => (
                 <motion.div
                   key={tech.category}
