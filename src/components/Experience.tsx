@@ -3,6 +3,21 @@ import { motion } from 'framer-motion';
 import { useInView } from 'framer-motion';
 import { useRef } from 'react';
 
+type ExperienceEntry = {
+  title: string;
+  company: string;
+  organization: string;
+  period: string;
+  description: string;
+  technologies: string[];
+  logo?: string;
+  logoText?: string;
+  logoWidth: number;
+  logoHeight: number;
+  logoClassName: string;
+  logoSurface: string;
+};
+
 const Experience = () => {
   const sectionRef = useRef(null);
   const isInView = useInView(sectionRef, {
@@ -11,7 +26,7 @@ const Experience = () => {
     amount: 0.2
   });
 
-  const experiences = [
+  const experiences: ExperienceEntry[] = [
     {
       title: "Software Engineer Intern",
       company: "Wahed — Remote",
