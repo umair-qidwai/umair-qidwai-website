@@ -100,9 +100,11 @@ const Experience = () => {
     { school: "Google", degree: "Project Management Professional Certificate (Coursera)", period: "2023", details: "", logo: "/images/companies/google_logo.jpeg" }
   ];
 
-  return (    <section ref={sectionRef} id="experience" className="py-20 px-6">
+  return (
+    <section id="experience" className="py-20 px-6">
       <div className="max-w-6xl mx-auto">
         <motion.h2
+          ref={sectionRef}
           initial={{ opacity: 0, y: 20 }}
           animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
           transition={{ duration: 0.5, ease: "easeOut" }}
