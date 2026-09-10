@@ -156,10 +156,10 @@ body {
 
 @keyframes twinkle {
   0%, 100% {
-    opacity: var(--base-opacity, 0.4);
+    opacity: calc(var(--base-opacity, 0.48) * 0.58);
   }
   50% {
-    opacity: calc(var(--base-opacity, 0.4) * 0.3);
+    opacity: var(--base-opacity, 0.48);
   }
 }
 
