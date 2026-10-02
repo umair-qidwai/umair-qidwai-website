@@ -48,13 +48,13 @@ const StarBackground = () => {
     if (!containerRef.current) return;
 
     const stars = generateStars();
-    const starsContainer = containerRef.current.querySelector('.stars-container');
+    const starsContainer = containerRef.current.querySelector<HTMLDivElement>('.stars-container');
     if (!starsContainer) return;
 
     stars.forEach(star => starsContainer.appendChild(star));
 
     let frameId = 0;
-      const isMobile = window.matchMedia('(max-width: 768px), (pointer: coarse)').matches;
+    const isMobile = window.matchMedia('(max-width: 768px), (pointer: coarse)').matches;
     const updateParallax = () => {
       frameId = 0;
       const scrolled = window.scrollY;
@@ -66,10 +66,10 @@ const StarBackground = () => {
       if (!frameId) frameId = requestAnimationFrame(updateParallax);
     };
 
-      if (!isMobile) {
-        window.addEventListener('scroll', handleScroll);
-        updateParallax();
-      }
+    if (!isMobile) {
+      window.addEventListener('scroll', handleScroll);
+      updateParallax();
+    }
 
     return () => {
       window.removeEventListener('scroll', handleScroll);
