@@ -24,13 +24,13 @@ const StarBackground = () => {
       
       wrapper.style.left = `${x}%`;
       wrapper.style.top = `${y}%`;
-      wrapper.style.setProperty('--drift-distance', `${Math.random() * 2.5 + 1}px`);
-      wrapper.style.setProperty('--drift-duration', `${4.5 + Math.random() * 3}s`);
+      wrapper.style.setProperty('--drift-distance', `${Math.random() * 2 + 2}px`);
+      wrapper.style.setProperty('--drift-duration', `${3.8 + Math.random() * 2.2}s`);
       wrapper.style.setProperty('--drift-delay', `-${Math.random() * 8}s`);
 
-      star.style.setProperty('--base-opacity', `${size === 'small' ? 0.48 : size === 'medium' ? 0.7 : 0.9}`);
-      star.style.setProperty('--twinkle-duration', `${1.6 + Math.random() * 1.8}s`);
-      star.style.setProperty('--rotate-speed', `${12 + Math.random() * 8}s`);
+      star.style.setProperty('--base-opacity', `${size === 'small' ? 0.52 : size === 'medium' ? 0.75 : 0.92}`);
+      star.style.setProperty('--twinkle-duration', `${1.3 + Math.random() * 1.4}s`);
+      star.style.setProperty('--rotate-speed', `${8 + Math.random() * 6}s`);
       star.style.setProperty('--orbit-distance', `${distance * 0.3}px`); // Scale down the orbit
       star.style.setProperty('--orbit-delay', `-${Math.random() * 16}s`); // Random start position
 
