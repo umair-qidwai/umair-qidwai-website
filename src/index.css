@@ -113,7 +113,6 @@ body {
 .star-wrapper {
   position: absolute;
   pointer-events: none;
-  will-change: transform;
   animation: drift var(--drift-duration, 7s) ease-in-out infinite alternate;
   animation-delay: var(--drift-delay, 0s);
 }
@@ -123,7 +122,6 @@ body {
   background: white;
   border-radius: 50%;
   transform-origin: center;
-  will-change: transform;
   pointer-events: none;
   animation: 
     twinkle var(--twinkle-duration, 2.6s) infinite ease-in-out,
@@ -177,15 +175,25 @@ body {
     transform: 
       rotate(0deg)
       translate(var(--orbit-distance, 20px))
-      translateY(var(--scroll-offset, 0))
+      translateY(var(--scroll-offset, 0px))
       rotate(0deg);
   }
   to {
     transform: 
       rotate(360deg)
       translate(var(--orbit-distance, 20px))
-      translateY(var(--scroll-offset, 0))
+      translateY(var(--scroll-offset, 0px))
       rotate(-360deg);
+  }
+}
+
+@media (max-width: 768px), (pointer: coarse) {
+  .star {
+    animation: twinkle var(--twinkle-duration, 2.6s) infinite ease-in-out;
+  }
+
+  .star-accent {
+    box-shadow: none;
   }
 }
 

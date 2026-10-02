@@ -5,7 +5,8 @@ const StarBackground = () => {
 
   const generateStars = () => {
     const stars = [];
-    const count = 220;
+    const isMobile = window.matchMedia('(max-width: 768px), (pointer: coarse)').matches;
+    const count = isMobile ? 72 : 160;
 
     for (let i = 0; i < count; i++) {
       const size = Math.random() < 0.55 ? 'small' : Math.random() < 0.82 ? 'medium' : 'large';
@@ -52,24 +53,27 @@ const StarBackground = () => {
 
     stars.forEach(star => starsContainer.appendChild(star));
 
-    const handleScroll = () => {
+    let frameId = 0;
+      const isMobile = window.matchMedia('(max-width: 768px), (pointer: coarse)').matches;
+    const updateParallax = () => {
+      frameId = 0;
       const scrolled = window.scrollY;
       const maxScroll = document.documentElement.scrollHeight - window.innerHeight;
-      const scrollPercent = (scrolled / maxScroll) * 100;
-
-      stars.forEach(star => {
-        const baseY = parseFloat(star.style.top) || 0;
-        const parallaxSpeed = (100 - baseY) * 0.001; // Stars higher up move more
-        const yOffset = scrollPercent * parallaxSpeed;
-        star.style.setProperty('--scroll-offset', `${yOffset}px`);
-      });
+      const scrollPercent = maxScroll > 0 ? (scrolled / maxScroll) * 100 : 0;
+      starsContainer.style.setProperty('--scroll-offset', `${scrollPercent * 0.05}px`);
+    };
+    const handleScroll = () => {
+      if (!frameId) frameId = requestAnimationFrame(updateParallax);
     };
 
-    window.addEventListener('scroll', handleScroll);
-    handleScroll(); // Initial position
+      if (!isMobile) {
+        window.addEventListener('scroll', handleScroll);
+        updateParallax();
+      }
 
     return () => {
       window.removeEventListener('scroll', handleScroll);
+      if (frameId) cancelAnimationFrame(frameId);
       stars.forEach(star => star.remove());
     };
   }, []);

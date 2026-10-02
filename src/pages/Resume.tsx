@@ -11,11 +11,11 @@ const Resume = () => {
   }, []);
 
   return (
-    <main className="h-screen w-screen bg-black">
+    <main className="h-[100dvh] w-full min-w-0 overflow-hidden bg-black">
       <iframe
-        src="/resume.pdf"
+        src="/resume.pdf#page=1&view=FitH&zoom=page-width"
         title="Umair Qidwai resume"
-        className="h-full w-full border-0"
+        className="block h-full w-full border-0"
       />
     </main>
   );
