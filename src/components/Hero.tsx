@@ -15,9 +15,8 @@ const Hero = () => {
           transition={{ duration: 0.8 }}
           className="space-y-6"
         >
-          <h1 className="text-6xl md:text-8xl font-bold">
-            <span className="text-white">Umair</span>
-            <br />
+          <h1 className="text-[11vw] md:text-8xl font-bold whitespace-nowrap">
+            <span className="text-white">Umair</span>{' '}
             <span className="text-green-400">Qidwai</span>
           </h1>
           
