@@ -8,8 +8,9 @@ type TimelineEntry = {
   description?: string;
   technologies?: string[];
   logo: string;
-  // Plate color matches the logo's own background so the image blends into the tile
-  logoPlate: string;
+  // Full-bleed logos fill the tile edge to edge instead of sitting on the shared dark plate
+  logoFull?: boolean;
+  // Wide wordmarks need tighter padding to stay legible in a square tile
   logoPadding?: string;
 };
 
@@ -21,8 +22,7 @@ const experiences: TimelineEntry[] = [
     description: "Developed iWaqf, a production full-stack charitable-endowment platform, with a team of four interns. Partnered with Wahed engineers and the founder to translate requirements into shipped frontend and backend features.",
     technologies: ["TypeScript", "React", "Backend Architecture", "Full Stack", "Production"],
     logo: "/images/companies/wahed_logo.png",
-    logoPlate: "bg-[#111315]",
-    logoPadding: "p-1.5 md:p-2"
+    logoPadding: "p-1.5 md:p-2",
   },
   {
     title: "Software Engineer Intern",
@@ -30,9 +30,7 @@ const experiences: TimelineEntry[] = [
     period: "May 2026 - September 2026",
     description: "Consolidated Python data pipelines onto a centralized server and PostgreSQL database, simplifying Power BI reporting across 100K+ license records. Automated crane inspections and AWS Bedrock key provisioning, then built a full-stack AI analytics assistant for read-only SQL analysis.",
     technologies: ["Python", "PostgreSQL", "Power BI", "AWS Bedrock", "AI Analytics"],
-    logo: "/images/companies/honda_logo.jpeg",
-    logoPlate: "bg-white",
-    logoPadding: "p-1"
+    logo: "/images/companies/honda_logo.svg",
   },
   {
     title: "Manufacturing System Engineer",
@@ -40,9 +38,7 @@ const experiences: TimelineEntry[] = [
     period: "August 2025 - December 2025",
     description: "Enhanced PRTG monitoring alerts and dashboards, improved Omnivex Moxie real-time manufacturing displays, and supported Honda's high-availability manufacturing line IT systems.",
     technologies: ["PRTG", "Omnivex Moxie", "Manufacturing IT", "Systems Support"],
-    logo: "/images/companies/honda_logo.jpeg",
-    logoPlate: "bg-white",
-    logoPadding: "p-1"
+    logo: "/images/companies/honda_logo.svg",
   },
   {
     title: "AI Software Engineer",
@@ -50,8 +46,7 @@ const experiences: TimelineEntry[] = [
     period: "May 2025 - July 2025",
     description: "Developed a context-aware AI chatbot with vector search and scalable FastAPI services, reducing response latency by 25%. Integrated a lightweight frontend and deployed the full-stack solution with optimized prompts and embeddings-based retrieval.",
     technologies: ["Vector Search", "FastAPI", "RAG", "Embeddings", "Full Stack"],
-    logo: "/images/companies/ezosolutions_logo.jpeg",
-    logoPlate: "bg-white"
+    logo: "/images/companies/ezo_logo.png",
   },
   {
     title: "Full-stack Developer",
@@ -60,7 +55,7 @@ const experiences: TimelineEntry[] = [
     description: "Designed a cross-platform real estate matching app with Supabase authentication, secure Python APIs, scalable Postgres storage, and React Native and SwiftUI frontends.",
     technologies: ["React Native", "SwiftUI", "Python", "FastAPI", "Supabase"],
     logo: "/images/companies/gocybersense_logo.jpeg",
-    logoPlate: "bg-[#0a0408]"
+    logoFull: true,
   }
 ];
 
@@ -70,23 +65,19 @@ const education: TimelineEntry[] = [
     organization: "Bachelor of Science, Computer Science & Engineering",
     period: "August 2024 - December 2027",
     description: "Honors Engineering student",
-    logo: "/images/companies/osu_logo.jpeg",
-    logoPlate: "bg-[#eaeaea]"
+    logo: "/images/companies/osu_logo.svg",
   },
   {
     title: "Harvard Online",
     organization: "CS50 Certificate, Computer Science",
     period: "June 2025 - November 2025",
-    logo: "/images/companies/harvardx_logo.jpeg",
-    logoPlate: "bg-[#dadad2]"
+    logo: "/images/companies/harvard_online_logo.png",
   },
   {
     title: "Google",
     organization: "Project Management Professional Certificate (Coursera)",
     period: "2023",
-    logo: "/images/companies/google_logo.jpeg",
-    logoPlate: "bg-white",
-    logoPadding: "p-1"
+    logo: "/images/companies/google_logo.svg",
   }
 ];
 
@@ -127,7 +118,7 @@ const Timeline = ({ entries }: { entries: TimelineEntry[] }) => {
                 className="col-start-1 row-start-1 flex justify-center pt-2 md:col-start-2"
               >
                 <div
-                  className={`flex h-16 w-16 items-center justify-center overflow-hidden rounded-2xl border border-green-500/40 shadow-[0_0_22px_rgba(74,222,128,0.25)] md:h-24 md:w-24 md:rounded-3xl ${entry.logoPlate} ${entry.logoPadding ?? ''}`}
+                  className={`flex h-16 w-16 items-center justify-center overflow-hidden rounded-2xl border border-green-500/40 shadow-[0_0_22px_rgba(74,222,128,0.25)] md:h-24 md:w-24 md:rounded-3xl ${entry.logoFull ? 'bg-[#0a0408]' : `bg-[#111315] ${entry.logoPadding ?? 'p-2.5 md:p-3.5'}`}`}
                 >
                   <img
                     src={entry.logo}
