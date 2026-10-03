@@ -110,7 +110,7 @@ const Navigation = () => {
           <motion.a
             whileHover={{ scale: 1.05 }}
             whileTap={{ scale: 0.95 }}
-            href="/resume"
+            href="/resume.pdf"
             target="_blank"
             rel="noopener noreferrer"
             className="flex items-center space-x-2 bg-green-500/20 hover:bg-green-500/30 border border-green-500/50 rounded-full px-4 py-2 transition-all"
