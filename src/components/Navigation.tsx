@@ -76,8 +76,8 @@ const Navigation = () => {
       ref={navRef}
       initial={{ y: -100 }}
       animate={{ y: 0 }}
-      className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
-        isScrolled ? 'bg-black/80 backdrop-blur-md border-b border-green-500/20' : ''
+      className={`fixed top-0 left-0 right-0 z-50 border-b transition-colors duration-300 ${
+        isScrolled ? 'bg-black/80 backdrop-blur-md border-green-500/20' : 'border-transparent'
       }`}
     >
       <div className="max-w-7xl mx-auto px-6 py-4">
