@@ -1,12 +1,11 @@
 import { useEffect } from 'react';
-import { motion } from 'framer-motion';
 import Hero from '../components/Hero';
 import About from '../components/About';
 import Experience from '../components/Experience';
 import Projects from '../components/Projects';
 import Contact from '../components/Contact';
 import Navigation from '../components/Navigation';
-import StarBackground from '../components/StarBackground';
+import CodeBackground from '../components/CodeBackground';
 
 const Index = () => {
   useEffect(() => {
@@ -17,7 +16,7 @@ const Index = () => {
   return (
     <div className="min-h-screen bg-black text-white relative overflow-x-hidden">
       {/* Background Effects */}
-      <StarBackground />
+      <CodeBackground />
       
       {/* Navigation */}
       <Navigation />
