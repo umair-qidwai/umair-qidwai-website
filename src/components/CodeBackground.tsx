@@ -77,9 +77,8 @@ const CodeBackground = () => {
       context.globalAlpha = 1;
     };
 
-    const move = (event: PointerEvent) => {
-      if (reducedMotion.matches || event.pointerType === 'touch' || document.hidden) return;
-      const { clientX: x, clientY: y } = event;
+    const reveal = (x: number, y: number) => {
+      if (reducedMotion.matches || document.hidden) return;
       if ((x - lastX) ** 2 + (y - lastY) ** 2 <= 40) return;
       trail.push({ x, y, time: performance.now() });
       if (trail.length > 60) trail.shift();
@@ -88,6 +87,16 @@ const CodeBackground = () => {
       if (!frame) frame = requestAnimationFrame(draw);
     };
     const leave = () => { lastX = lastY = -Infinity; };
+    const move = (event: PointerEvent) => {
+      // Touch events continue during native scrolling after pointercancel.
+      if (event.pointerType !== 'touch') reveal(event.clientX, event.clientY);
+    };
+    const touch = (event: TouchEvent) => {
+      const point = event.touches[0];
+      if (!point) return;
+      if (event.type === 'touchstart') leave();
+      reveal(point.clientX, point.clientY);
+    };
     const reset = () => {
       cancelAnimationFrame(frame);
       frame = 0;
@@ -99,6 +108,10 @@ const CodeBackground = () => {
 
     resize();
     window.addEventListener('pointermove', move, { passive: true });
+    window.addEventListener('touchstart', touch, { passive: true });
+    window.addEventListener('touchmove', touch, { passive: true });
+    window.addEventListener('touchend', leave, { passive: true });
+    window.addEventListener('touchcancel', leave, { passive: true });
     document.documentElement.addEventListener('pointerleave', leave);
     window.addEventListener('blur', reset);
     window.addEventListener('resize', handleResize);
@@ -107,6 +120,10 @@ const CodeBackground = () => {
     return () => {
       reset();
       window.removeEventListener('pointermove', move);
+      window.removeEventListener('touchstart', touch);
+      window.removeEventListener('touchmove', touch);
+      window.removeEventListener('touchend', leave);
+      window.removeEventListener('touchcancel', leave);
       document.documentElement.removeEventListener('pointerleave', leave);
       window.removeEventListener('blur', reset);
       window.removeEventListener('resize', handleResize);
