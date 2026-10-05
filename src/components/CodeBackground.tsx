@@ -87,11 +87,24 @@ const CodeBackground = () => {
       if (!frame) frame = requestAnimationFrame(draw);
     };
     const leave = () => { lastX = lastY = -Infinity; };
+    const isInteractiveTarget = (target: EventTarget | null) =>
+      target instanceof Element && Boolean(target.closest(
+        'a, button, input, select, textarea, [role="button"], [role="link"], [contenteditable="true"]',
+      ));
     const move = (event: PointerEvent) => {
+      if (isInteractiveTarget(event.target)) {
+        reset();
+        return;
+      }
       // Touch events continue during native scrolling after pointercancel.
       if (event.pointerType !== 'touch') reveal(event.clientX, event.clientY);
     };
     const touch = (event: TouchEvent) => {
+      // Control taps should navigate immediately, without starting a canvas render.
+      if (isInteractiveTarget(event.target)) {
+        reset();
+        return;
+      }
       const point = event.touches[0];
       if (!point) return;
       if (event.type === 'touchstart') leave();

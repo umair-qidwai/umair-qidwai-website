@@ -2,7 +2,14 @@
   "$schema": "https://openapi.vercel.sh/vercel.json",
   "headers": [
     {
-      "source": "/assets/resume-:hash.pdf",
+      "source": "/Umair-Qidwai-Resume.pdf",
+      "has": [
+        {
+          "type": "query",
+          "key": "v",
+          "value": "[a-f0-9]{12}"
+        }
+      ],
       "headers": [
         {
           "key": "Cache-Control",
@@ -10,16 +17,27 @@
         },
         {
           "key": "Content-Disposition",
-          "value": "inline; filename=\"resume.pdf\""
+          "value": "inline; filename=\"Umair-Qidwai-Resume.pdf\""
         }
       ]
     },
     {
-      "source": "/resume.pdf",
+      "source": "/Umair-Qidwai-Resume.pdf",
+      "missing": [
+        {
+          "type": "query",
+          "key": "v",
+          "value": "[a-f0-9]{12}"
+        }
+      ],
       "headers": [
         {
           "key": "Cache-Control",
           "value": "public, max-age=300, must-revalidate"
+        },
+        {
+          "key": "Content-Disposition",
+          "value": "inline; filename=\"Umair-Qidwai-Resume.pdf\""
         }
       ]
     }
@@ -27,7 +45,22 @@
   "redirects": [
     {
       "source": "/resume",
-      "destination": "/resume.pdf",
+      "destination": "/Umair-Qidwai-Resume.pdf",
+      "permanent": false
+    },
+    {
+      "source": "/resume.pdf",
+      "destination": "/Umair-Qidwai-Resume.pdf",
+      "permanent": false
+    },
+    {
+      "source": "/assets/resume-:hash.pdf",
+      "destination": "/Umair-Qidwai-Resume.pdf",
+      "permanent": false
+    },
+    {
+      "source": "/assets/resume-:hash/Umair-Qidwai-Resume.pdf",
+      "destination": "/Umair-Qidwai-Resume.pdf",
       "permanent": false
     }
   ],

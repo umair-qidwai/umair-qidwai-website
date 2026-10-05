@@ -4,6 +4,8 @@
 
 **URL**: https://umairqidwai.com
 
-To update the resume, replace `public/resume.pdf`. Production builds create a
-versioned copy that the Resume button preloads and caches, including in Safari.
-The original `/resume.pdf` URL remains available for direct links.
+To update the resume, replace `public/Umair-Qidwai-Resume.pdf` and rebuild.
+The Resume button preloads and caches that single file using
+`/Umair-Qidwai-Resume.pdf?v=<version>`. The version updates automatically when
+the PDF changes. Old `/resume`, `/resume.pdf`, and generated asset links redirect
+to the named PDF.

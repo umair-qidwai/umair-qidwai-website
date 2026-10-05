@@ -18,23 +18,16 @@ const Navigation = () => {
 
     if (connection?.saveData) return;
 
-    let timer: number | undefined;
-    const schedulePrefetch = () => {
-      // Let the homepage's images and scripts finish before warming the PDF.
-      timer = window.setTimeout(() => {
-        if (document.visibilityState === 'visible') void prefetchResume();
-      }, 1000);
+    const preloadWhenVisible = () => {
+      if (document.visibilityState === 'visible') void prefetchResume();
     };
 
-    if (document.readyState === 'complete') {
-      schedulePrefetch();
-    } else {
-      window.addEventListener('load', schedulePrefetch, { once: true });
-    }
+    // Start as soon as the link is available, including after returning to a tab.
+    preloadWhenVisible();
+    document.addEventListener('visibilitychange', preloadWhenVisible);
 
     return () => {
-      window.removeEventListener('load', schedulePrefetch);
-      window.clearTimeout(timer);
+      document.removeEventListener('visibilitychange', preloadWhenVisible);
     };
   }, []);
 
@@ -135,9 +128,7 @@ const Navigation = () => {
             ))}
           </div>
           
-          <motion.a
-            whileHover={{ scale: 1.05 }}
-            whileTap={{ scale: 0.95 }}
+          <a
             href={resumeUrl}
             onPointerEnter={(event) => {
               if (event.pointerType === 'mouse') void prefetchResume();
@@ -147,11 +138,11 @@ const Navigation = () => {
             }}
             target="_blank"
             rel="noopener noreferrer"
-            className="flex items-center space-x-2 bg-green-500/20 hover:bg-green-500/30 border border-green-500/50 rounded-full px-4 py-2 transition-all"
+            className="touch-manipulation flex items-center space-x-2 bg-green-500/20 hover:bg-green-500/30 border border-green-500/50 rounded-full px-4 py-2 transition-colors"
           >
             <Download size={16} />
             <span>Resume</span>
-          </motion.a>
+          </a>
         </div>
       </div>
     </motion.nav>
