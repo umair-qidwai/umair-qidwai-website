@@ -1,7 +1,7 @@
 import { useState, useEffect, useRef } from 'react';
 import { motion } from 'framer-motion';
 import { Download } from 'lucide-react';
-import { prefetchResume, resumeUrl } from '@/lib/resume';
+import { resumeUrl } from '@/lib/resume';
 
 const sectionIds = ['about', 'experience', 'projects', 'contact'] as const;
 type SectionId = (typeof sectionIds)[number];
@@ -10,26 +10,6 @@ const Navigation = () => {
   const [isScrolled, setIsScrolled] = useState(false);
   const [activeSection, setActiveSection] = useState<SectionId | null>(null);
   const navRef = useRef<HTMLElement>(null);
-
-  useEffect(() => {
-    const connection = (navigator as Navigator & {
-      connection?: { saveData?: boolean };
-    }).connection;
-
-    if (connection?.saveData) return;
-
-    const preloadWhenVisible = () => {
-      if (document.visibilityState === 'visible') void prefetchResume();
-    };
-
-    // Start as soon as the link is available, including after returning to a tab.
-    preloadWhenVisible();
-    document.addEventListener('visibilitychange', preloadWhenVisible);
-
-    return () => {
-      document.removeEventListener('visibilitychange', preloadWhenVisible);
-    };
-  }, []);
 
   useEffect(() => {
     let animationFrame: number | null = null;
@@ -130,12 +110,6 @@ const Navigation = () => {
           
           <a
             href={resumeUrl}
-            onPointerEnter={(event) => {
-              if (event.pointerType === 'mouse') void prefetchResume();
-            }}
-            onFocus={(event) => {
-              if (event.currentTarget.matches(':focus-visible')) void prefetchResume();
-            }}
             target="_blank"
             rel="noopener noreferrer"
             className="touch-manipulation flex items-center space-x-2 bg-green-500/20 hover:bg-green-500/30 border border-green-500/50 rounded-full px-4 py-2 transition-colors"

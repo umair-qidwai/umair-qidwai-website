@@ -3,33 +3,6 @@
   "headers": [
     {
       "source": "/Umair-Qidwai-Resume.pdf",
-      "has": [
-        {
-          "type": "query",
-          "key": "v",
-          "value": "[a-f0-9]{12}"
-        }
-      ],
-      "headers": [
-        {
-          "key": "Cache-Control",
-          "value": "public, max-age=31536000, immutable"
-        },
-        {
-          "key": "Content-Disposition",
-          "value": "inline; filename=\"Umair-Qidwai-Resume.pdf\""
-        }
-      ]
-    },
-    {
-      "source": "/Umair-Qidwai-Resume.pdf",
-      "missing": [
-        {
-          "type": "query",
-          "key": "v",
-          "value": "[a-f0-9]{12}"
-        }
-      ],
       "headers": [
         {
           "key": "Cache-Control",
