@@ -113,3 +113,21 @@ body {
     @apply bg-background text-foreground;
   }
 }
+
+/* Hero entrance runs in CSS so it stays smooth while the app is still rendering on phones */
+@keyframes hero-fade-up {
+  from { opacity: 0; transform: translateY(30px); }
+  to { opacity: 1; transform: none; }
+}
+
+@keyframes hero-fade {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+.hero-fade-up { animation: hero-fade-up 0.8s ease-out both; }
+.hero-fade { animation: hero-fade 0.8s ease-out both; }
+
+@media (prefers-reduced-motion: reduce) {
+  .hero-fade-up, .hero-fade { animation: none; }
+}
