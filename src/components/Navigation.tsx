@@ -1,6 +1,7 @@
 import { useState, useEffect, useRef } from 'react';
 import { motion } from 'framer-motion';
 import { Download } from 'lucide-react';
+import { prefetchResume, resumeUrl } from '@/lib/resume';
 
 const sectionIds = ['about', 'experience', 'projects', 'contact'] as const;
 type SectionId = (typeof sectionIds)[number];
@@ -9,6 +10,33 @@ const Navigation = () => {
   const [isScrolled, setIsScrolled] = useState(false);
   const [activeSection, setActiveSection] = useState<SectionId | null>(null);
   const navRef = useRef<HTMLElement>(null);
+
+  useEffect(() => {
+    const connection = (navigator as Navigator & {
+      connection?: { saveData?: boolean };
+    }).connection;
+
+    if (connection?.saveData) return;
+
+    let timer: number | undefined;
+    const schedulePrefetch = () => {
+      // Let the homepage's images and scripts finish before warming the PDF.
+      timer = window.setTimeout(() => {
+        if (document.visibilityState === 'visible') void prefetchResume();
+      }, 1000);
+    };
+
+    if (document.readyState === 'complete') {
+      schedulePrefetch();
+    } else {
+      window.addEventListener('load', schedulePrefetch, { once: true });
+    }
+
+    return () => {
+      window.removeEventListener('load', schedulePrefetch);
+      window.clearTimeout(timer);
+    };
+  }, []);
 
   useEffect(() => {
     let animationFrame: number | null = null;
@@ -110,7 +138,13 @@ const Navigation = () => {
           <motion.a
             whileHover={{ scale: 1.05 }}
             whileTap={{ scale: 0.95 }}
-            href="/resume.pdf"
+            href={resumeUrl}
+            onPointerEnter={(event) => {
+              if (event.pointerType === 'mouse') void prefetchResume();
+            }}
+            onFocus={(event) => {
+              if (event.currentTarget.matches(':focus-visible')) void prefetchResume();
+            }}
             target="_blank"
             rel="noopener noreferrer"
             className="flex items-center space-x-2 bg-green-500/20 hover:bg-green-500/30 border border-green-500/50 rounded-full px-4 py-2 transition-all"
