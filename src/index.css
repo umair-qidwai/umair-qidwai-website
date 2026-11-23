@@ -1,19 +1,21 @@
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
+@import 'tailwindcss';
 
-/* iOS Safari specific styles */
-body {
-  background-color: black;
-  color-scheme: dark;
-}
+@config "../tailwind.config.ts";
 
-@supports (padding: max(0px)) {
+@layer utilities {
+  /* iOS Safari specific styles */
   body {
-    padding-left: min(0vmin, env(safe-area-inset-left));
-    padding-right: min(0vmin, env(safe-area-inset-right));
-    padding-top: min(0vmin, env(safe-area-inset-top));
-    padding-bottom: min(0vmin, env(safe-area-inset-bottom));
+    background-color: black;
+    color-scheme: dark;
+  }
+
+  @supports (padding: max(0px)) {
+    body {
+      padding-left: min(0vmin, env(safe-area-inset-left));
+      padding-right: min(0vmin, env(safe-area-inset-right));
+      padding-top: min(0vmin, env(safe-area-inset-top));
+      padding-bottom: min(0vmin, env(safe-area-inset-bottom));
+    }
   }
 }
 

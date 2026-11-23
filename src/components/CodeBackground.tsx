@@ -147,7 +147,7 @@ const CodeBackground = () => {
 
   return (
     <div aria-hidden="true" className="pointer-events-none fixed inset-0 z-0 overflow-hidden">
-      <div className="absolute inset-0 bg-gradient-to-b from-black via-[#0A192F] to-black" />
+      <div className="absolute inset-0 bg-linear-to-b from-black via-[#0A192F] to-black" />
       <canvas ref={canvasRef} className="absolute inset-0 h-full w-full" style={{ maskImage: EDGE_MASK, WebkitMaskImage: EDGE_MASK }} />
     </div>
   );

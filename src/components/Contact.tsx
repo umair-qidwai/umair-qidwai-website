@@ -2,7 +2,8 @@
 import { motion } from 'framer-motion';
 import { useInView } from 'framer-motion';
 import { useRef } from 'react';
-import { Github, Linkedin, Mail } from 'lucide-react';
+import { Mail } from 'lucide-react';
+import { Github, Linkedin } from './brand-icons';
 
 const Contact = () => {
   const ref = useRef(null);

@@ -75,7 +75,7 @@ const Projects = () => {
                 />
               )}
 
-              <div className="aspect-video overflow-hidden bg-gradient-to-br from-green-900/20 to-green-600/10">
+              <div className="aspect-video overflow-hidden bg-linear-to-br from-green-900/20 to-green-600/10">
                 <img
                   src={project.image}
                   alt={project.title}

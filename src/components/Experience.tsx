@@ -97,7 +97,7 @@ const Timeline = ({ entries }: { entries: TimelineEntry[] }) => {
       >
         <motion.div
           style={{ scaleY: progress }}
-          className="h-full w-full origin-top rounded-full bg-gradient-to-b from-green-300 via-green-500 to-green-500/0 shadow-[0_0_18px_rgba(74,222,128,0.6)]"
+          className="h-full w-full origin-top rounded-full bg-linear-to-b from-green-300 via-green-500 to-green-500/0 shadow-[0_0_18px_rgba(74,222,128,0.6)]"
         />
       </div>
 

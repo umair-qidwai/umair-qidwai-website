@@ -31,8 +31,8 @@ const Index = () => {
       </main>
       
       {/* Gradient Overlays */}
-      <div className="fixed inset-0 pointer-events-none z-[1]">
-        <div className="absolute top-0 left-0 w-full h-full bg-gradient-to-b from-black/40 via-transparent to-black/40" />
+      <div className="fixed inset-0 pointer-events-none z-1">
+        <div className="absolute top-0 left-0 w-full h-full bg-linear-to-b from-black/40 via-transparent to-black/40" />
         {/* Soft glows drawn as gradients: blur filters flicker on iOS while compositing */}
         <div className="absolute bottom-0 right-0 w-[32rem] h-[32rem] translate-x-16 translate-y-16 bg-[radial-gradient(circle,rgba(34,197,94,0.05)_35%,transparent_70%)]" />
         <div className="absolute top-1/4 left-1/4 w-[22rem] h-[22rem] -translate-x-12 -translate-y-12 bg-[radial-gradient(circle,rgba(74,222,128,0.05)_35%,transparent_70%)]" />
